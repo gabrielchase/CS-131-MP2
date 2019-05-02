@@ -1,50 +1,34 @@
-def compute_x_prod(point, x, i):
-    x_prod = 1
+def newton_raphson(a, m, n, x=1, desired_percent_error=.01):
+    percent_error = 1
+    while (percent_error >= desired_percent_error):
+        # print('fx:', compute_fx(x, n, a, m))
+        # print('dfx:', compute_dfx(x, n, a, m))
+        # print(x, '-', compute_fx(x, n, a, m) / compute_dfx(x, n, a, m))
+        xnp1 = x - (compute_fx(x, n, a, m) / compute_dfx(x, n, a, m))
+        percent_error = get_percent_error(xnp1, x)
+        x = xnp1
+        # print('error%: ', percent_error)
+    return x
 
-    for _i in range(i):
-        x_prod *= point - x[_i]
-    
-    return x_prod
+def get_percent_error(xnp1, xn):
+    return abs(((xnp1 - xn) / xnp1))
 
-def interpolate(point, x, y):
-    n = len(y)
-    total = y[0][0]
-    x_prod = 0 
+def fake_exponent(base, exp):
+    b = 1 
+    for i in range(exp):
+        b *= base 
+    return b
 
-    for i in range(1, n):
-        x_prod = compute_x_prod(point, x, i)
-        total += (y[0][i] * x_prod)
+def compute_fx(x, n, a, m):
+    return fake_exponent(x, n) - fake_exponent(a, m)
 
-    return total
-
-def print_divided_difference(y):
-    n = len(y)
-
-    for i in range(n):
-        for j in range(n - i):
-            print(y[i][j], "\t", end = " ");
-        print("")
-
-def divided_difference(x, y):
-    n = len(x)
-    
-    for i in range (1, n):
-        for j in range(n - i):
-            y[j][i] = ((y[j][i - 1] - y[j + 1][i - 1]) / (x[j] - x[i + j]))
-    
-    return y
-
+def compute_dfx(x, n, a, m):
+    return (n)*(fake_exponent(x, n-1))
 
 if __name__ == '__main__':
-    x = [ -5, -1, 0, 2 ]
-    y = [[0 for i in range(len(x))] for j in range(len(x))]
-
-    y[0][0] = -2
-    y[1][0] = 6
-    y[2][0] = 1
-    y[3][0] = 3
-    
-    y = divided_difference(x, y)
-    print_divided_difference(y)
-    val = interpolate(7, x, y)
-    print(val)
+    a, m, n = input('A, M, N: ').split()
+    a = int(a)
+    m = int(m)
+    n = int(n)
+    result = newton_raphson(a, m, n)
+    print('{}^({}/{}) = {}'.format(a, m, n, result))
