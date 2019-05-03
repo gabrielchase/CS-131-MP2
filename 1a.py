@@ -1,13 +1,9 @@
 def newton_raphson(a, m, n, x=1, desired_percent_error=.01):
     percent_error = 1
     while (percent_error >= desired_percent_error):
-        # print('fx:', compute_fx(x, n, a, m))
-        # print('dfx:', compute_dfx(x, n, a, m))
-        # print(x, '-', compute_fx(x, n, a, m) / compute_dfx(x, n, a, m))
         xnp1 = x - (compute_fx(x, n, a, m) / compute_dfx(x, n, a, m))
         percent_error = get_percent_error(xnp1, x)
         x = xnp1
-        # print('error%: ', percent_error)
     return x
 
 def get_percent_error(xnp1, xn):

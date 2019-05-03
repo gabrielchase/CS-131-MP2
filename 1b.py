@@ -2,11 +2,12 @@ import math
 
 def newton_raphson(a=0, x=.5, desired_percent_error=.01):
     percent_error = 1
+    
     while (percent_error >= desired_percent_error):
         xnp1 = x - (compute_fx(x, a) / compute_dfx(x))
         percent_error = get_percent_error(xnp1, x)
         x = xnp1
-        print('error%: ', percent_error)
+    
     return x
 
 def get_percent_error(xnp1, xn):
