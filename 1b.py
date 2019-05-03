@@ -1,3 +1,12 @@
+'''
+Gabriel Patron
+2014-89015
+CS 131 THU
+
+Michael Pio Mayol
+2014-32780
+CS 131 THU
+'''
 import math
 
 def newton_raphson(a=0, x=.5, desired_percent_error=.01):

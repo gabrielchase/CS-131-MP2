@@ -1,3 +1,12 @@
+'''
+Gabriel Patron
+2014-89015
+CS 131 THU
+
+Michael Pio Mayol
+2014-32780
+CS 131 THU
+'''
 def newton_raphson(a, m, n, x=1, desired_percent_error=.01):
     percent_error = 1
     while (percent_error >= desired_percent_error):
